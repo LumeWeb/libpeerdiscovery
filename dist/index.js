@@ -24,6 +24,9 @@ class PeerDiscovery {
     removeAllSources() {
         this._sources.clear();
     }
+    sourceExists(name) {
+        return this._sources.has(name);
+    }
     async discover(pubkey, options = {}) {
         if (!b4a_1.default.isBuffer(pubkey)) {
             pubkey = b4a_1.default.from(pubkey, "hex");

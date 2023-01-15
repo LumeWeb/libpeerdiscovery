@@ -9,5 +9,6 @@ export declare class PeerDiscovery {
     registerSource(name: string, source: PeerSource): boolean;
     removeSource(name: string): boolean;
     removeAllSources(): void;
+    sourceExists(name: string): boolean;
     discover(pubkey: string | Buffer, options?: {}): Promise<Peer | boolean>;
 }
