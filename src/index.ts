@@ -32,6 +32,10 @@ export class PeerDiscovery {
     return true;
   }
 
+  public removeAllSources(): void {
+    this._sources.clear();
+  }
+
   public async discover(
     pubkey: string | Buffer,
     options = {}
