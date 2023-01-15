@@ -21,12 +21,12 @@ class PeerDiscovery {
         this._sources.delete(name);
         return true;
     }
-    async discover(pubkey) {
+    async discover(pubkey, options = {}) {
         if (!b4a_1.default.isBuffer(pubkey)) {
             pubkey = b4a_1.default.from(pubkey, "hex");
         }
         for (const source of this._sources.values()) {
-            const result = await source(pubkey);
+            const result = await source(pubkey, options);
             if (result) {
                 return result;
             }
