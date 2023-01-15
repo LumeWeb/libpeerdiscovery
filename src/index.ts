@@ -36,6 +36,10 @@ export class PeerDiscovery {
     this._sources.clear();
   }
 
+  public sourceExists(name: string): boolean {
+    return this._sources.has(name);
+  }
+
   public async discover(
     pubkey: string | Buffer,
     options = {}
