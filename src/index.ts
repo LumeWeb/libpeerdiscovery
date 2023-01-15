@@ -5,7 +5,10 @@ export interface Peer {
   port: number;
 }
 
-export type PeerSource = (pubkey: Buffer) => Promise<boolean | Peer>;
+export type PeerSource = (
+  pubkey: Buffer,
+  options?: any
+) => Promise<boolean | Peer>;
 
 export class PeerDiscovery {
   private _sources: Map<string, PeerSource> = new Map<string, PeerSource>();
@@ -29,13 +32,16 @@ export class PeerDiscovery {
     return true;
   }
 
-  public async discover(pubkey: string | Buffer): Promise<Peer | boolean> {
+  public async discover(
+    pubkey: string | Buffer,
+    options = {}
+  ): Promise<Peer | boolean> {
     if (!b4a.isBuffer(pubkey)) {
       pubkey = b4a.from(pubkey, "hex") as Buffer;
     }
 
     for (const source of this._sources.values()) {
-      const result = await source(pubkey);
+      const result = await source(pubkey, options);
 
       if (result) {
         return result;
