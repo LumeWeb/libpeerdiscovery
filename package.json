@@ -1,14 +1,24 @@
 {
-    "name": "@lumeweb/peer-discovery",
+    "name": "@lumeweb/libpeerdiscovery",
     "version": "0.1.0",
-    "main": "dist/index.js",
+    "type": "module",
+    "main": "lib/index.js",
+    "types": "lib/index.d.ts",
     "devDependencies": {
-        "@types/b4a": "^1.6.0",
-        "@types/node": "^18.11.17",
-        "prettier": "^2.8.1",
-        "typescript": "^4.9.4"
+        "@lumeweb/node-library-preset": "^0.2.5",
+        "presetter": "*"
+    },
+    "readme": "ERROR: No README data found!",
+    "_id": "@lumeweb/libpeerdiscovery@0.1.0",
+    "scripts": {
+        "prepare": "presetter bootstrap",
+        "build": "run build",
+        "semantic-release": "semantic-release"
     },
     "dependencies": {
-        "b4a": "^1.6.1"
+        "b4a": "^1.6.4"
+    },
+    "publishConfig": {
+        "access": "public"
     }
 }

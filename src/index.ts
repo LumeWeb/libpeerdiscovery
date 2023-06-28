@@ -7,7 +7,7 @@ export interface Peer {
 
 export type PeerSource = (
   pubkey: Buffer,
-  options?: any
+  options?: any,
 ) => Promise<boolean | Peer>;
 
 export class PeerDiscovery {
@@ -42,14 +42,14 @@ export class PeerDiscovery {
 
   public async discover(
     pubkey: string | Buffer,
-    options = {}
+    options = {},
   ): Promise<Peer | boolean> {
     if (!b4a.isBuffer(pubkey)) {
       pubkey = b4a.from(pubkey, "hex") as Buffer;
     }
 
     for (const source of this._sources.values()) {
-      const result = await source(pubkey, options);
+      const result = await source(pubkey as Buffer, options);
 
       if (result) {
         return result;
