@@ -13,6 +13,12 @@ export type PeerSource = (
 export class PeerDiscovery {
   private _sources: Map<string, PeerSource> = new Map<string, PeerSource>();
 
+  private _logger = console.log;
+
+  set logger(value: (...data: any[]) => void) {
+    this._logger = value;
+  }
+
   public registerSource(name: string, source: PeerSource): boolean {
     if (this._sources.has(name)) {
       return false;
@@ -49,10 +55,14 @@ export class PeerDiscovery {
     }
 
     for (const source of this._sources.values()) {
-      const result = await source(pubkey as Buffer, options);
+      try {
+        const result = await source(pubkey as Buffer, options);
 
-      if (result) {
-        return result;
+        if (result) {
+          return result;
+        }
+      } catch (e) {
+        this._logger(e);
       }
     }
 
